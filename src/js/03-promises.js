@@ -1,4 +1,4 @@
-import { Notify } from "notiflix";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function createPromise(position, delay) {   
   return new Promise((resolve, reject) => {
@@ -9,13 +9,11 @@ function createPromise(position, delay) {
     }, delay);
   })
 }
-const form = document.querySelector('.form');
-
-form.addEventListener('submit', e => { 
+document.querySelector('.form').addEventListener('submit', e => { 
   e.preventDefault();
-  const first_delay =Number(form.delay.value);
-  const step = Number(form.step.value);
-  const amount =Number(form.amount.value);   
+  const first_delay =Number(e.target.delay.value);
+  const step = Number(e.target.step.value);
+  const amount =Number(e.target.amount.value);   
   [...Array(amount).keys()]
     .map(x => ++x)
     .map(x => createPromise(x, (step * (x-1)+first_delay)))
